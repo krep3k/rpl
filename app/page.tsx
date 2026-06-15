@@ -60,6 +60,7 @@ export default function PortofolioPortal() {
             Selamat datang di portal portofolio kami. Tugas Rekayasa Perangkat Lunak ini dibangun dengan fokus pada performa, desain responsif, dan kolaborasi tim.
           </p>
           <div className="inline-block bg-golden text-darkGreen px-6 py-3 rounded-full font-bold border-2 border-darkGreen shadow-[4px_4px_0px_0px_#014231] animate-bounce mt-4">
+            Scroll Kebawah
             <ArrowDown className="inline ml-2 w-5 h-5"/>
           </div>
         </motion.div>
