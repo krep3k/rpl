@@ -1,26 +1,12 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme {
+  /* Konfigurasi warna nuansa Teh & Lemon untuk Tailwind v4 */
+  --color-greenery: #007e5d;
+  --color-golden: #f8c828;
+  --color-darkGreen: #014231;
+  --color-cream: #fdfbf0;
+  
+  /* Konfigurasi shadow solid gaya Neo-Brutalism */
+  --shadow-solid: 6px 6px 0px 0px #014231;
 }
