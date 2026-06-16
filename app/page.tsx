@@ -3,7 +3,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { ArrowDown, Shield, Zap, Code, Database, Layout, Play, X, Star, Award, Terminal, CheckCircle2, GitBranch, Cpu, Clock } from "lucide-react";
+import { ArrowDown, Shield, Zap, Code, Database, Layout, Play, X, Star, Award, Terminal, CheckCircle2, GitBranch, Cpu, Clock, Mail, Phone, Copy, Check } from "lucide-react";
+import { FaLinkedinIn, FaGithub, FaInstagram } from "react-icons/fa";
 
 const teamMembers = [
   {
@@ -18,6 +19,14 @@ const teamMembers = [
     gridPos: { top: "15%", left: "50%" },
     videoUrl: "/videos/111111.mp4",
     photoUrl: "",
+    contacts: {
+      email: "-",
+      github: "-",
+      linkedin: "-",
+      instagram: "-",
+      whatsapp: "-"
+    },
+    availability: ["Available for Collaboration", "Lead Developer", "Student Developer"],
     skills: [
       { label: "Frontend (FE)", val: 85 },
       { label: "Backend (BE)", val: 95 },
@@ -56,6 +65,14 @@ const teamMembers = [
     gridPos: { top: "45%", left: "20%" },
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-and-data-31911-large.mp4",
     photoUrl: "",
+    contacts: {
+      email: "fiqrisaputra727@gmail.com",
+      github: "https://github.com/krep3k",
+      linkedin: "https://www.linkedin.com/in/muhamadfiqriganteng",
+      instagram: "https://www.instagram.com/fiqripersegi/",
+      whatsapp: "6285177824316"
+    },
+    availability: ["Available for Collaboration", "Lead Developer", "Student Developer"],
     skills: [
       { label: "Frontend (FE)", val: 80 },
       { label: "Backend (BE)", val: 65 },
@@ -94,6 +111,14 @@ const teamMembers = [
     gridPos: { top: "45%", left: "80%" },
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-matrix-style-green-code-running-44825-large.mp4",
     photoUrl: "",
+    contacts: {
+      email: "-",
+      github: "-",
+      linkedin: "-",
+      instagram: "-",
+      whatsapp: "-"
+    },
+    availability: ["Available for Collaboration", "Lead Developer", "Student Developer"],
     skills: [
       { label: "Frontend (FE)", val: 94 },
       { label: "Backend (BE)", val: 70 },
@@ -132,6 +157,14 @@ const teamMembers = [
     gridPos: { top: "70%", left: "50%" },
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-tech-futuristic-lines-and-dots-background-32122-large.mp4",
     photoUrl: "",
+    contacts: {
+      email: "-",
+      github: "-",
+      linkedin: "-",
+      instagram: "-",
+      whatsapp: "-"
+    },
+    availability: ["Available for Collaboration", "Lead Developer", "Student Developer"],
     skills: [
       { label: "Frontend (FE)", val: 65 },
       { label: "Backend (BE)", val: 92 },
@@ -170,6 +203,14 @@ const teamMembers = [
     gridPos: { top: "90%", left: "50%" },
     videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-glowing-lines-background-32121-large.mp4",
     photoUrl: "",
+    contacts: {
+      email: "-",
+      github: "-",
+      linkedin: "-",
+      instagram: "-",
+      whatsapp: "-"
+    },
+    availability: ["Available for Collaboration", "Lead Developer", "Student Developer"],
     skills: [
       { label: "Frontend (FE)", val: 99 },
       { label: "Backend (BE)", val: 99 },
@@ -201,10 +242,21 @@ const teamMembers = [
 export default function PortofolioPortal() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedPlayer, setSelectedPlayer] = useState<typeof teamMembers[0] | null>(null);
+  const [contactPlayer, setContactPlayer] = useState<typeof teamMembers[0] | null>(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const handleCopy = (text: string, field: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 2000);
+  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if(e.key === "Escape") setSelectedPlayer(null);
+      if(e.key === "Escape") {
+        setSelectedPlayer(null);
+        setContactPlayer(null);
+      };
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -324,7 +376,7 @@ export default function PortofolioPortal() {
                     <button onClick={() => setSelectedPlayer(member)} className="py-2 px-3 bg-greenery text-cream font-black text-xs rounded-xl border-2 border-darkGreen shadow-[2px_2px_0px_0px_#014231] hover:bg-greenery/90 active:translate-y-0.5 active:shadow-none transition-all">
                       VIEW PROFILE
                     </button>
-                    <button className="py-2 px-3 bg-golden text-darkGreen font-black text-xs rounded-xl border-2 border-darkGreen shadow-[2px_2px_0px_0px_#014231] active:translate-y-0.5 active:shadow-none transition-all">
+                    <button onClick={() => setContactPlayer(member)} className="py-2 px-3 bg-golden text-darkGreen font-black text-xs rounded-xl border-2 border-darkGreen shadow-[2px_2px_0px_0px_#014231] active:translate-y-0.5 active:shadow-none transition-all">
                       CONTACT PLAYER
                     </button>
                   </div>
@@ -481,6 +533,117 @@ export default function PortofolioPortal() {
                     </button>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {contactPlayer && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setContactPlayer(null)} className="absolute inset-0 bg-black/80 backdrop-blur-sm"/>
+            <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} transition={{ type: "spring", damping: 25, stiffness: 350 }} className="relative bg-cream border-4 border-darkGreen w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl p-5 md:p-8 shadow-[8px_8px_0px_0px_#014231] z-10 text-darkGreen">
+              <button title="close" onClick={() => setContactPlayer(null)} className="absolute top-4 right-4 md:top-6 md:right-6 bg-golden border-2 border-darkGreen text-darkGreen p-2 rounded-xl shadow-[2px_2px_0px_0px_#014231] hover:scale-105 active:translate-y-0.5 active:shadow-none transition-all z-30">
+                <X className="w-5 h-5 stroke-3"/>
+              </button>
+              <div className="bg-darkGreen border-4 border-darkGreen p-5 rounded-2xl text-cream flex justify-between items-center gap-4 relative overflow-hidden mb-6 shadow-solid">
+                <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#fdfbf0_1px,transparent_1px),linear-gradient(to_bottom,#fdfbf0_1px,transparent_1px)] bg-size-[16px_16px]"/>
+                <div className="flex items-center gap-4 relative z-10 min-w-0">
+                  <div className="w-20 h-20 bg-golden rounded-2xl border-4 border-cream flex flex-col items-center justify-center text-darkGreen font-black text-2xl shadow-[4px_4px_0px_0px_#00664a] shrink-0 overflow-hidden">
+                    {contactPlayer.photoUrl ? (
+                      <img src={contactPlayer.photoUrl} alt={contactPlayer.name} className="w-full h-full object-cover rounded-xl" />
+                    ) : (
+                      <>
+                        <span className="text-[10px] font-black opacity-60">#{contactPlayer.jerseyNo}</span>
+                        <span className="leading-none mt-0.5">{contactPlayer.name.split(" ").map(n => n[0]).join("").substring(0, 3)}</span>
+                      </>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <span className="bg-greenery text-cream text-[9px] font-black tracking-widest px-2 py-0.5 rounded border border-cream/30 uppercase">
+                      {contactPlayer.role.split("/")[0]}
+                    </span>
+                    <h2 className="text-xl md:text-2xl font-black tracking-tight uppercase mt-1 text-golden truncate">
+                      {contactPlayer.name}
+                    </h2>
+                    <p className="text-xs font-bold text-cream/70 truncate">
+                      NIM: {contactPlayer.nim}
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-golden text-darkGreen border-4 border-cream p-2 px-3 rounded-xl flex flex-col items-center justify-center min-w-16.25 shadow-[3px_3px_0px_0px_#00664a] relative z-10 shrink-0">
+                  <span className="text-2xl font-black tracking-tighter leading-none">{contactPlayer.ovr}</span>
+                  <span className="text-[9px] font-black uppercase tracking-wider">OVR</span>
+                </div>
+              </div>
+              <div className="space-y-3 mb-6">
+                <h3 className="text-xs font-black tracking-widest uppercase text-greenery flex items-center gap-1.5">
+                  <Star className="w-3.5 h-3.5 fill-current"/> PRIMARY CONTACT LINK
+                </h3>
+                <div className="bg-cream border-2 border-darkGreen p-3 rounded-xl flex items-center justify-between gap-3 shadow-[2px_2px_0px_0px_#014231]">
+                  <a title="email" href={`mailto:${contactPlayer.contacts?.email}`} className="flex items-center gap-3 min-w-0 flex-1 group">
+                    <div className="p-2 bg-greenery text-cream rounded-lg border border-darkGreen shrink-0 group-hover:bg-golden group-hover:text-darkGreen transition-colors">
+                      <Mail className="w-4 h-4"/>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[10px] font-black uppercase text-greenery/70 leading-none">EMAIL ADDRESS</div>
+                      <div className="text-xs md:text-sm font-black truncate text-darkGreen mt-0.5 group-hover:underline">{contactPlayer.contacts?.email}</div>
+                    </div>
+                  </a>
+                  <button title="copyEmail" onClick={() => handleCopy(contactPlayer.contacts?.email || "", "email")} className="p-2 bg-cream border-2 border-darkGreen rounded-lg hover:bg-darkGreen/5 text-darkGreen transition-all active:scale-95 shrink-0">
+                    {copiedField === "email" ? <Check className="w-4 h-4 text-greenery stroke-3"/> : <Copy className="w-4 h-4"/>}
+                  </button>
+                </div>
+                <div className="bg-cream border-2 border-darkGreen p-3 rounded-xl flex items-center justify-between gap-3 shadow-[2px_2px_0px_0px_#014231]">
+                  <a title="phone" href={`https://wa.me/${contactPlayer.contacts?.whatsapp}`} target="blank" rel="noopener noreferrer"className="flex items-center gap-3 min-w-0 flex-1 group">
+                    <div className="p-2 bg-greenery text-cream rounded-lg border border-darkGreen shrink-0 group-hover:bg-golden group-hover:text-darkGreen transition-colors">
+                      <Phone className="w-4 h-4"/>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-[10px] font-black uppercase text-greenery/70 leading-none">WHATSAPP NUMBER</div>
+                      <div className="text-xs md:text-sm font-black truncate text-darkGreen mt-0.5 group-hover:underline">{contactPlayer.contacts?.whatsapp}</div>
+                    </div>
+                  </a>
+                  <button title="wa" onClick={() => handleCopy(`+${contactPlayer.contacts?.whatsapp || ""}`, "wa")} className="p-2 bg-cream border-2 border-darkGreen rounded-lg hover:bg-darkGreen/5 text-darkGreen transition-all active:scale-95 shrink-0">
+                    {copiedField === "wa" ? <Check className="w-4 h-4 text-greenery stroke-3"/> : <Copy className="w-4 h-4"/>}
+                  </button>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h3 className="text-xs font-black tracking-widest uppercase text-greenery mb-3 flex items-center gap-1.5">
+                  <Terminal className="w-3.5 h-3.5"/>SOCIAL NETWORK
+                </h3>
+                <div className="grid grid-cols-3 gap-3">
+                  <a href={contactPlayer.contacts?.github} target="blank" rel="noopener no referrer" className="bg-cream border-2 border-darkGreen p-3 rounded-xl flex flex-col items-center justify-center gap-1.5 text-center shadow-[3px_3px_0px_0px_#014231] hover:bg-darkGreen hover:text-cream transition-all group duration-300">
+                    <FaGithub className="w-5 h-5 stroke-2.5"/>
+                    <span className="text-[10px] font-black uppercase tracking-wider">GITHUB</span>
+                  </a>
+                  <a href={contactPlayer.contacts?.linkedin} target="blank" rel="noopener noreferrer" className="bg-cream border-2 border-darkGreen p-3 rounded-xl flex flex-col items-center justify-center gap-1.5 text-center shadow-[3px_3px_0px_0px_#014231] hover:bg-darkGreen hover:text-cream transition-all group duration-300">
+                    <FaLinkedinIn className="w-5 h-5 stroke-2.5"/>
+                    <span className="text-[10px] font-black uppercase tracking-wider">LINKEDIN</span>
+                  </a>
+                  <a href={contactPlayer.contacts?.instagram} target="blank" rel="noopener noreferrer" className="bg-cream border-2 border-darkGreen p-3 rounded-xl flex flex-col items-center justify-center gap-1.5 text-center shadow-[3px_3px_0px_0px_#014231] hover:bg-darkGreen hover:text-cream transition-all group duration-300">
+                    <FaInstagram className="w-5 h-5 stroke-2.5"/>
+                    <span className="text-[10px] font-black uppercase tracking-wider">INSTAGRAM</span>
+                  </a>
+                </div>
+              </div>
+              <div className="mb-6">
+                <h3 className="text-xs font-black tracking-widest uppercase text-greenery mb-2.5 flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5"/>DEVELOPMENT AVAILABILITY
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                    {contactPlayer.availability?.map((status, sIdx) => (
+                      <span key={sIdx} className="bg-golden text-darkGreen px-3 py-1 rounded-lg text-[10px] font-black border-2 border-darkGreen shadow-[1.5px_1.5px_0px_0px_#014231] uppercase tracking-wide">
+                        {status}
+                      </span>
+                    ))}
+                </div>
+              </div>
+              <div className="pt-4 border-t-2 border-darkGreen/10 flex justify-end">
+                    <button onClick={() => setContactPlayer(null)} className="py-2 px-5 bg-darkGreen text-cream font-black text-xs rounded-xl border-2 border-darkGreen shadow-[3px_3px_0px_0px_#014231] hover:bg-darkGreen/90 active:translate-y-0.5 active:shadow-none transition-all uppercase tracking-wider">
+                      CLOSE WINDOW
+                    </button>
               </div>
             </motion.div>
           </div>
