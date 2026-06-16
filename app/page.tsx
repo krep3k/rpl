@@ -249,7 +249,7 @@ export default function PortofolioPortal() {
     navigator.clipboard.writeText(text);
     setCopiedField(field);
     setTimeout(() => setCopiedField(null), 2000);
-  }
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -386,6 +386,19 @@ export default function PortofolioPortal() {
           </div>
         </div>
       </div>
+      <section className="w-full bg-golden py-12 flex flex-col items-center justify-center border-t-4 border-darkgreen px-4 relative z-20">
+        <div className="w-full max-w-xl text-center bg-cream border-4 border-darkgreen p-6 md:p-8 rounded-3xl shadow-solid">
+          <h3 className="text-xl md:text-2xl font-black text-darkgreen uppercase mb-2 tracking-tight">
+            JELAJAHI MODUL APLIKASI
+          </h3>
+          <p className="text-xs md:text-sm font-bold text-darkgreen/80 mb-6 max-w-sm mx-auto">
+            Masuk ke gerbang pusat kemudi untuk melihat semua menu yang ada.
+          </p>
+          <a href="/navigation" className="inline-block w-full sm:w-auto px-8 py-4 bg-greenery text-cream font-black text-sm rounded-xl border-4 border-darkgreen shadow-[4px_4px_0px_0px_#014231] hover:bg-greenery/90 active:translate-y-1 active:shadow-none transition-all uppercase tracking-wider text-center">
+            BUKA NAVIGASI HUB
+          </a>
+        </div>
+      </section>
       <footer className="bg-darkGreen py-6 text-center text-cream border-t-4 border-cream text-xs font-bold uppercase tracking-wider relative z-20">
         &copy; 2026 REKAYASA PERANGKAT LUNAK TIM • INDONESIA SQUAD PORTAL
       </footer>
