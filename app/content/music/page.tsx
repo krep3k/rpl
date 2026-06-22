@@ -10,10 +10,17 @@ import { useRouter } from "next/navigation";
 const songList = [
     {
         id: 1,
-        title: "lofi",
+        title: "samba",
         artist: "RPL Team...",
         cover: "/picture/jeki.jpg",
         src: "/audio/samba.mp3",
+    },
+    {
+        id: 2,
+        title: "lofi",
+        artist: "RPL Team...",
+        cover: "/picture/pahri.jpg",
+        src: "/audio/noCopyright.mp3",
     },
 ];
 
@@ -129,16 +136,64 @@ export default function MusicPage() {
 
     return (
         <div className="min-h-screen bg-cream text-darkgreen font-sans p-4 md:p-8 pb-32 relative overflow-hidden selection:bg-golden">
-            <div className="absolute inset-0 pointer-events-none opacity-20 z-0">
-                {[...Array(6)].map((_, i) => (
-                    <motion.div key={i} initial={{ x: Math.random() * 100 + "%", y: Math.random() * 100 + "%" }} animate={{
-                        x: [null, Math.random() * 100 + "%", Math.random() * 100 + "%"],
-                        y: [null, Math.random() * 100 + "%", Math.random() * 100 + "%"],
-                        rotate: [0, 360],
-                }} transition={{ duration: 30 + i * 5, repeat: Infinity, ease: "linear" }} className="absolute bg-greenery/10 border-2 border-darkgreen rounded-full flex items-center justify-center p-3 text-darkgreen">
-                    <Disc3 className="w-8 h-8"/>
-                </motion.div>
-                ))}
+            <div className="absolute inset-0 pointer-events-none opacity-60 z-10 overflow-hidden">
+                {[...Array(16)].map((_, i) => {
+                    const size = [6, 8, 10, 12, 14][i % 5];
+                    
+                    // 16 posisi dengan gerakan ke berbagai arah
+                    const paths = [
+                        // Horizontal (left-right)
+                        { startX: "0%", startY: "10%", midX: "50%", midY: "15%", endX: "100%", endY: "8%" },
+                        { startX: "100%", startY: "20%", midX: "50%", midY: "22%", endX: "0%", endY: "18%" },
+                        
+                        // Vertical (top-bottom)
+                        { startX: "15%", startY: "0%", midX: "12%", midY: "50%", endX: "18%", endY: "100%" },
+                        { startX: "85%", startY: "100%", midX: "88%", midY: "50%", endX: "82%", endY: "0%" },
+                        
+                        // Diagonal top-left to bottom-right
+                        { startX: "0%", startY: "0%", midX: "40%", midY: "40%", endX: "85%", endY: "90%" },
+                        { startX: "10%", startY: "5%", midX: "45%", midY: "45%", endX: "90%", endY: "95%" },
+                        
+                        // Diagonal top-right to bottom-left
+                        { startX: "100%", startY: "0%", midX: "60%", midY: "40%", endX: "15%", endY: "90%" },
+                        { startX: "95%", startY: "5%", midX: "55%", midY: "45%", endX: "10%", endY: "95%" },
+                        
+                        // Diagonal bottom-left to top-right
+                        { startX: "0%", startY: "100%", midX: "40%", midY: "60%", endX: "85%", endY: "10%" },
+                        { startX: "5%", startY: "95%", midX: "45%", midY: "55%", endX: "90%", endY: "5%" },
+                        
+                        // Diagonal bottom-right to top-left
+                        { startX: "100%", startY: "100%", midX: "60%", midY: "60%", endX: "15%", endY: "10%" },
+                        { startX: "95%", startY: "95%", midX: "55%", midY: "55%", endX: "10%", endY: "5%" },
+                        
+                        // Middle horizontal paths
+                        { startX: "0%", startY: "50%", midX: "50%", midY: "48%", endX: "100%", endY: "52%" },
+                        { startX: "100%", startY: "45%", midX: "50%", midY: "45%", endX: "0%", endY: "48%" },
+                        
+                        // Center-outward paths
+                        { startX: "50%", startY: "50%", midX: "25%", midY: "25%", endX: "5%", endY: "10%" },
+                        { startX: "50%", startY: "50%", midX: "75%", midY: "75%", endX: "95%", endY: "90%" },
+                    ];
+                    
+                    const path = paths[i];
+                    
+                    return (
+                        <motion.div 
+                            key={i} 
+                            initial={{ left: path.startX, top: path.startY }} 
+                            animate={{ 
+                                left: [path.startX, path.midX, path.endX, path.startX],
+                                top: [path.startY, path.midY, path.endY, path.startY],
+                                rotate: [0, 90, 180, 270, 360] 
+                            }} 
+                            transition={{ duration: 100 + i * 15, repeat: Infinity, ease: "linear" }} 
+                            className="absolute bg-greenery/30 border-2 border-darkgreen rounded-full flex items-center justify-center text-darkgreen"
+                            style={{ padding: `${size * 3}px`, width: 'fit-content', height: 'fit-content' }}
+                        >
+                            <Disc3 className={`w-${size} h-${size}`}/>
+                        </motion.div>
+                    );
+                })}
             </div>
             <audio ref={audioRef} src={currentSong.src} onTimeUpdate={onTimeUpdate} onEnded={playNext}/>
             <header className="flex flex-col md:flex-row items-center justify-between gap-4 mb-10 relative z-10">

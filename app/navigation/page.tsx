@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { Users, Music, Film, Folder, ArrowLeft, Compass, Code } from "lucide-react";
+import { Users, Music, Film, Folder, ArrowLeft, Compass, Code, Palette } from "lucide-react";
 
 interface SignItem {
     id: number;
@@ -20,7 +20,7 @@ const navigationSign: SignItem[] = [
         id: 1,
         title: "👥 Gallery Tim",
         description: "Dokumentasi keseruan perjalanan dan kolaborasi projek tim.",
-        destination: "/content/gallery",
+        destination: "/content/photo",
         icon: Users,
         rotation: -3,
         side: "left",
@@ -38,17 +38,17 @@ const navigationSign: SignItem[] = [
         id: 3,
         title: "🎬 Random Video",
         description: "Koleksi video receh penurun tingkat stress dan hiburan tim.",
-        destination: "/content/videos",
+        destination: "/content/video",
         icon: Film,
         rotation: -2,
         side: "left",
     },
     {
         id: 4,
-        title: "📂 Behind The Scene",
+        title: "🪐 Theme Playground",
         description: "Intip proses pengerjaan di balik layar pembuatan aplikasi ini.",
-        destination: "/bts",
-        icon: Folder,
+        destination: "/content/playground",
+        icon: Palette,
         rotation: 3,
         side: "right",
     },
