@@ -16,7 +16,7 @@ const teamMembers = [
     ovr: "92",
     bio: "-",
     icon: Zap,
-    gridPos: { top: "15%", left: "50%" },
+    gridPos: { top: "10%", left: "50%" },
     videoUrl: "/videos/riski.mp4",
     photoUrl: "/picture/riski.jpg",
     contacts: {
@@ -55,6 +55,52 @@ const teamMembers = [
   },
   {
     id: 2,
+    name: "Kevin Ersa Leksana",
+    nim: "231011403028",
+    jerseyNo: "30",
+    role: "-",
+    ovr: "92",
+    bio: "-",
+    icon: Zap,
+    gridPos: { top: "30%", left: "50%" },
+    videoUrl: "/videos/kepin.mp4",
+    photoUrl: "/picture/kepin.jpg",
+    contacts: {
+      email: "-",
+      github: "-",
+      linkedin: "-",
+      instagram: "-",
+      whatsapp: "-"
+    },
+    availability: ["Available for Collaboration", "Lead Developer", "Student Developer"],
+    skills: [
+      { label: "Frontend (FE)", val: 90 },
+      { label: "Backend (BE)", val: 95 },
+      { label: "Database (DB)", val: 90 },
+      { label: "UI/UX Design", val: 97 },
+      { label: "Problem Solving", val: 94 },
+      { label: "Teamwork", val: 90 },
+    ],
+    techStack: ["TypeScript", "Next.js", "Node.js", "Express", "MongoDB", "Git"],
+    contribution: [
+      { field: "UI Design", pct: 30 },
+      { field: "Frontend", pct: 56 },
+      { field: "Backend", pct: 77 },
+      { field: "Database", pct: 90 },
+      { field: "Testing", pct: 5 },
+      { field: "Dokumentasi", pct: 10 },
+    ],
+    progStats: [
+      { label: "Project Selesai", val: "12" },
+      { label: "Git Commit", val: "340" },
+      { label: "Bug Diperbaiki", val: "89" },
+      { label: "Pull Request", val: "45" },
+      { label: "Pengalaman", val: "2 Thn" },
+    ],
+    achievements: ["Problem Solver", "Clean Code", "Best Teamwork"],
+  },
+  {
+    id: 3,
     name: "Muhamad Fiqri Dwi Saputra",
     nim: "231011400959",
     jerseyNo: "11",
@@ -100,7 +146,7 @@ const teamMembers = [
     achievements: ["UI Specialist", "Fast Learner", "Best Teamwork"],
   },
   {
-    id: 3,
+    id: 4,
     name: "Muhamad Pahri",
     nim: "231011400999",
     jerseyNo: "7",
@@ -146,7 +192,7 @@ const teamMembers = [
     achievements: ["Clean Code", "Fast Learner", "Problem Solver"],
   },
   {
-    id: 4,
+    id: 5,
     name: "Najmi Cipta Nugraha",
     nim: "231011401000",
     jerseyNo: "69",
@@ -192,7 +238,7 @@ const teamMembers = [
     achievements: ["Problem Solver", "Best Teamwork", "Clean Code"],
   },
   {
-    id: 5,
+    id: 6,
     name: "Zaki Arfa Mustafa",
     nim: "231011402066",
     jerseyNo: "666",
@@ -236,7 +282,7 @@ const teamMembers = [
       { label: "Pengalaman", val: "100 Thn" },
     ],
     achievements: ["Best Teamwork", "Fast Learner", "UI Specialist"],
-  }
+  },
 ];
 
 export default function PortofolioPortal() {
